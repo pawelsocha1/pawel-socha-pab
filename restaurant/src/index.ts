@@ -2,7 +2,9 @@
 import express from "express";
 import { Request, Response } from "express";
 import bodyParser from "body-parser";
-import stolikiRoutes from "../routes/stoliki";
+import stolikRoutes from "../routes/stolik";
+import restauracjaRoutes from "../routes/restauracja";
+import pracownikRoutes from "../routes/pracownik";
 
 const mongoose = require("mongoose");
 
@@ -11,7 +13,7 @@ const app = express();
 const PORT = 3000;
 
 const dbURI =
-  "mongodb+srv://mnosel00:tnTpYzbhZl4KLelk@endapp.mznzj.mongodb.net/EndAppDb?retryWrites=true&w=majority";
+  "mongodb+srv://pawelsocha:mongo300@cluster0.gltbz43.mongodb.net/test";
 
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result:any) => console.log("Connected to Mongoose: " + app.listen(3000)))
@@ -19,7 +21,9 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(bodyParser.json());
 
-app.use("/stoliki", stolikiRoutes);
+app.use("/stolik", stolikRoutes);
+app.use("/restauracja", restauracjaRoutes);
+app.use("/pracownik", pracownikRoutes);
 
 app.get("/", function (req: Request, res: Response) {
   res.send("Witaj w API restauracji");

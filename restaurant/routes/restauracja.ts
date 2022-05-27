@@ -3,11 +3,11 @@ import { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { appendFile } from "fs";
 
-const Stolik = require("../models/stolikSchema");
+const Restauracja = require("../models/restauracjaSchema");
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {
-  Stolik.find()
+  Restauracja.find()
     .then((result: any) => {
       res.send(result);
     })
@@ -17,50 +17,54 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.get("/getSingle/:id", (req: Request, res: Response) => {
-  Stolik.findById(req.params.id)
+  Restauracja.findById(req.params.id)
     .then((result: any) => {
       res.send(result);
     })
     .catch((err: any) => {
-      res.send("Nie mamy stolika o takim id w bazie");
+      res.send("Nie ma restauracji o takim ID");
     });
 });
 
 router.post("/addNew", (req: Request, res: Response) => {
-  let stolik = new Stolik({
+  let restauracja = new Restauracja({
     nazwa: req.body.nazwa,
-    iloscOsob: req.body.iloscOsob,
-    status: req.body.status,
+    adres: req.body.adres,
+    telefon: req.body.telefon,
+    nip: req.body.nip,
+    email: req.body.email,
+    www: req.body.www,
   });
 
-  stolik
+  restauracja
     .save()
     .then((result: any) => {
       res.send(result);
     })
     .catch((error: any) => {
-      res.send("Błędne dane stolika, proszę poprawić status oraz sprawdzić format wprowadzonych danych");
+      res.send(
+        "Niepoprawne dane restauracji, spróbuj jeszcze raz");
     });
 });
 
 router.put("/updateSingle/:id", (req: Request, res: Response) => {
-  Stolik.findByIdAndUpdate(req.params.id, req.body, {new:true})
+  Restauracja.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((result: any) => {
       res.send(result);
     })
     .catch((error: any) => {
-      res.send("Nie mamy stolika o takim id w bazie")
+      res.send("Nie mam restauracji o takim ID");
     });
 });
 
 router.delete("/deleteSingle/:id", (req: Request, res: Response) => {
-  Stolik.findByIdAndRemove(req.params.id)
+  Restauracja.findByIdAndRemove(req.params.id)
     .then((result: any) => {
       res.send(result);
     })
     .catch((err: any) => {
-      res.send("stolika o takim id nie ma w bazie lub został wcześniej usunięty")
+      res.send(
+        "Nie ma restauracji o takim ID lub została usunięta");
     });
 });
-
 export default router;
