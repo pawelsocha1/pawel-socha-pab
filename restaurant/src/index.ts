@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import stolikRoutes from "../routes/stolik";
 import restauracjaRoutes from "../routes/restauracja";
 import pracownikRoutes from "../routes/pracownik";
+import rezerwacjaRoutes from "../routes/rezerwacja"
+import produktRoutes from "../routes/produkt"
 
 const mongoose = require("mongoose");
 
@@ -24,6 +26,8 @@ app.use(bodyParser.json());
 app.use("/stolik", stolikRoutes);
 app.use("/restauracja", restauracjaRoutes);
 app.use("/pracownik", pracownikRoutes);
+app.use("/rezerwacja", rezerwacjaRoutes);
+app.use("/produkt", produktRoutes);
 
 app.get("/", function (req: Request, res: Response) {
   res.send("Witaj w API restauracji");
