@@ -7,6 +7,8 @@ import restauracjaRoutes from "../routes/restauracja";
 import pracownikRoutes from "../routes/pracownik";
 import rezerwacjaRoutes from "../routes/rezerwacja"
 import produktRoutes from "../routes/produkt"
+import danieRoutes from "../routes/danie"
+import zamowienieRoutes from "../routes/zamowienie"
 
 const mongoose = require("mongoose");
 
@@ -28,6 +30,8 @@ app.use("/restauracja", restauracjaRoutes);
 app.use("/pracownik", pracownikRoutes);
 app.use("/rezerwacja", rezerwacjaRoutes);
 app.use("/produkt", produktRoutes);
+app.use("/danie", danieRoutes);
+app.use("/zamownie", zamowienieRoutes);
 
 app.get("/", function (req: Request, res: Response) {
   res.send("Witaj w API restauracji");
