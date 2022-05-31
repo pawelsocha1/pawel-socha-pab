@@ -1,6 +1,7 @@
 const mongooseRestauracja = require("mongoose");
 const SchemaRestauracja = mongooseRestauracja.Schema;
 
+
 let restauracjaSchema = new SchemaRestauracja(
   {
     nazwa: {
